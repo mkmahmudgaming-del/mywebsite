@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mk Mahmud Shoop BD ORDER</title>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial;
+}
+
+body{
+  background:#f2f2f2;
+  padding:20px;
+}
+
+.container{
+  max-width:500px;
+  margin:auto;
+  background:white;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+h1{
+  text-align:center;
+  color:green;
+  margin-bottom:20px;
+  font-size:35px;
+}
+
+input, textarea{
+  width:100%;
+  padding:15px;
+  margin-top:15px;
+  border:1px solid #ccc;
+  border-radius:10px;
+  font-size:18px;
+}
+
+label{
+  display:block;
+  margin-top:15px;
+  font-size:18px;
+  font-weight:bold;
+}
+
+button{
+  width:100%;
+  padding:15px;
+  background:green;
+  color:white;
+  border:none;
+  border-radius:10px;
+  margin-top:15px;
+  font-size:18px;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#006400;
+}
+
+.order-box{
+  background:#f9f9f9;
+  padding:15px;
+  border-radius:10px;
+  margin-top:20px;
+  border-left:5px solid green;
+}
+
+img{
+  width:100%;
+  margin-top:10px;
+  border-radius:10px;
+}
+
+.status{
+  margin-top:10px;
+  font-weight:bold;
+}
+
+.delivered{
+  color:green;
+}
+
+.cancel{
+  color:red;
+}
+
+.flex{
+  display:flex;
+  gap:10px;
+}
+
+.flex button{
+  width:50%;
+}
+
+.delete-btn{
+  background:red;
+}
+
+.delete-btn:hover{
+  background:darkred;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h1>Mk Mahmud Shoop BD ORDER</h1>
+
+<input type="text" id="name" placeholder="আপনার নাম">
+
+<input type="text" id="phone" placeholder="মোবাইল নাম্বার">
+
+<textarea id="address" placeholder="সম্পূর্ণ ঠিকানা"></textarea>
+
+<label>স্ক্রিনশট আপলোড করুন</label>
+
+<input type="file" id="screenshot" accept="image/*">
+
+<button onclick="saveOrder()">অর্ডার করুন</button>
+
+<div id="orders"></div>
+
+</div>
+
+<script>
+
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+function saveOrder(){
+
+  let name = document.getElementById("name").value;
+  let phone = document.getElementById("phone").value;
+  let address = document.getElementById("address").value;
+  let file = document.getElementById("screenshot").files[0];
+
+  if(name=="" || phone=="" || address==""){
+    alert("সব তথ্য পূরণ করুন");
+    return;
+  }
+
+  let reader = new FileReader();
+
+  reader.onload = function(e){
+
+    let order = {
+      id: Date.now(),
+      name:name,
+      phone:phone,
+      address:address,
+      screenshot:e.target.result,
+      status:"Pending"
+    };
+
+    orders.push(order);
+
+    localStorage.setItem("orders", JSON.stringify(orders));
+
+    clearForm();
+
+    showOrders();
+
+    alert("অর্ডার সফল হয়েছে");
+
+  };
+
+  if(file){
+    reader.readAsDataURL(file);
+  }else{
+
+    let order = {
+      id: Date.now(),
+      name:name,
+      phone:phone,
+      address:address,
+      screenshot:"",
+      status:"Pending"
+    };
+
+    orders.push(order);
+
+    localStorage.setItem("orders", JSON.stringify(orders));
+
+    clearForm();
+
+    showOrders();
+
+    alert("অর্ডার সফল হয়েছে");
+  }
+
+}
+
+function clearForm(){
+
+  document.getElementById("name").value="";
+  document.getElementById("phone").value="";
+  document.getElementById("address").value="";
+  document.getElementById("screenshot").value="";
+
+}
+
+function showOrders(){
+
+  let div = document.getElementById("orders");
+
+  div.innerHTML="";
+
+  orders.slice().reverse().forEach(order=>{
+
+    div.innerHTML += `
+
+    <div class="order-box">
+
+      <p><b>নাম:</b> ${order.name}</p>
+
+      <p><b>ফোন:</b> ${order.phone}</p>
+
+      <p><b>ঠিকানা:</b> ${order.address}</p>
+
+      ${
+        order.screenshot
+        ?
+        `<img src="${order.screenshot}">`
+        :
+        ``
+      }
+
+      <p class="status">
+        স্ট্যাটাস:
+        <span class="${
+          order.status=="Delivered"
+          ? "delivered"
+          : order.status=="Cancel"
+          ? "cancel"
+          : ""
+        }">
+          ${order.status}
+        </span>
+      </p>
+
+      <div class="flex">
+
+        <button onclick="delivered(${order.id})">
+          Delivered
+        </button>
+
+        <button onclick="cancelOrder(${order.id})">
+          Cancel
+        </button>
+
+      </div>
+
+      ${
+        order.status=="Delivered"
+        ?
+        `
+        <button class="delete-btn" onclick="deleteOrder(${order.id})">
+          Delete Order
+        </button>
+        `
+        :
+        ``
+      }
+
+    </div>
+
+    `;
+
+  });
+
+}
+
+function delivered(id){
+
+  orders = orders.map(order=>{
+
+    if(order.id===id){
+      order.status="Delivered";
+    }
+
+    return order;
+
+  });
+
+  localStorage.setItem("orders", JSON.stringify(orders));
+
+  showOrders();
+
+}
+
+function cancelOrder(id){
+
+  orders = orders.map(order=>{
+
+    if(order.id===id){
+      order.status="Cancel";
+    }
+
+    return order;
+
+  });
+
+  localStorage.setItem("orders", JSON.stringify(orders));
+
+  showOrders();
+
+}
+
+function deleteOrder(id){
+
+  let confirmDelete = confirm("আপনি কি এই অর্ডার ডিলিট করতে চান?");
+
+  if(confirmDelete){
+
+    orders = orders.filter(order => order.id !== id);
+
+    localStorage.setItem("orders", JSON.stringify(orders));
+
+    showOrders();
+
+  }
+
+}
+
+showOrders();
+
+</script>
+
+</body>
+</html>
