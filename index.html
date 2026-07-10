@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mk Mahmud Shoop BD ORDER</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f2f2f2;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      text-align: center;
+      color: #1e7e34;
+      margin-bottom: 8px;
+      font-size: 32px;
+      letter-spacing: 0.5px;
+      border-bottom: 2px solid #e6f0e6;
+      padding-bottom: 16px;
+    }
+    .sub-brand {
+      text-align: center;
+      font-weight: 600;
+      color: #2d5a2d;
+      background: #eaf7ea;
+      display: inline-block;
+      padding: 6px 22px;
+      border-radius: 40px;
+      font-size: 15px;
+      margin: 0 auto 20px;
+      letter-spacing: 1px;
+      border: 1px solid #b8d9b8;
+    }
+    .brand-wrap {
+      text-align: center;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 14px 16px;
+      margin-top: 14px;
+      border: 1px solid #d0d7d0;
+      border-radius: 12px;
+      font-size: 17px;
+      background: #fafcfa;
+      transition: 0.2s;
+    }
+    input:focus, textarea:focus {
+      border-color: #1e7e34;
+      outline: none;
+      background: #ffffff;
+      box-shadow: 0 0 0 3px rgba(30, 126, 52, 0.15);
+    }
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    label {
+      display: block;
+      margin-top: 20px;
+      font-size: 17px;
+      font-weight: 600;
+      color: #1e3a1e;
+      letter-spacing: 0.3px;
+    }
+
+    .file-label {
+      background: #f0f8f0;
+      padding: 12px 14px;
+      border-radius: 40px;
+      border: 1px dashed #3b8b3b;
+      cursor: pointer;
+      display: inline-block;
+      margin-top: 6px;
+      font-weight: 500;
+      color: #1e5a1e;
+      transition: 0.2s;
+    }
+    .file-label:hover {
+      background: #e2f0e2;
+    }
+    input[type="file"] {
+      display: none;
+    }
+
+    .btn-primary {
+      width: 100%;
+      padding: 16px;
+      background: #1e7e34;
+      color: white;
+      border: none;
+      border-radius: 40px;
+      margin-top: 24px;
+      font-size: 20px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 8px rgba(30, 126, 52, 0.2);
+    }
+    .btn-primary:hover {
+      background: #146128;
+      transform: scale(1.01);
+      box-shadow: 0 6px 14px rgba(30, 126, 52, 0.3);
+    }
+
+    .order-box {
+      background: #f8fbf8;
+      padding: 18px 18px 16px;
+      border-radius: 18px;
+      margin-top: 24px;
+      border-left: 6px solid #1e7e34;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      transition: 0.15s;
+    }
+    .order-box:hover {
+      background: #f5faf5;
+    }
+
+    .order-box p {
+      margin: 8px 0;
+      font-size: 16px;
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .order-box p b {
+      min-width: 70px;
+      color: #1d3d1d;
+    }
+
+    .order-box img {
+      width: 100%;
+      max-height: 200px;
+      object-fit: contain;
+      margin-top: 12px;
+      border-radius: 14px;
+      border: 1px solid #dae8da;
+      background: #f0f5f0;
+      padding: 6px;
+    }
+
+    .status {
+      margin-top: 14px !important;
+      font-size: 17px;
+      font-weight: 600;
+      background: #edf3ed;
+      padding: 6px 14px;
+      border-radius: 40px;
+      display: inline-block;
+    }
+    .status .delivered {
+      color: #0f6b2a;
+      font-weight: 700;
+    }
+    .status .cancel {
+      color: #b13a3a;
+      font-weight: 700;
+    }
+    .status .pending {
+      color: #a17a2b;
+      font-weight: 600;
+    }
+
+    .flex {
+      display: flex;
+      gap: 12px;
+      margin: 18px 0 8px;
+      flex-wrap: wrap;
+    }
+    .flex button {
+      flex: 1;
+      padding: 12px 8px;
+      border: none;
+      border-radius: 60px;
+      font-weight: 700;
+      font-size: 15px;
+      background: #e8f0e8;
+      color: #154f26;
+      cursor: pointer;
+      transition: 0.15s;
+      border: 1px solid #bcd0bc;
+      letter-spacing: 0.5px;
+    }
+    .flex button:hover {
+      background: #d0e4d0;
+      transform: scale(0.98);
+    }
+    .flex button:first-child {
+      background: #1e7e34;
+      color: white;
+      border: none;
+    }
+    .flex button:first-child:hover {
+      background: #146128;
+    }
+    .flex button:last-child {
+      background: #f0e0e0;
+      color: #8f2a2a;
+      border-color: #dbb6b6;
+    }
+    .flex button:last-child:hover {
+      background: #e6cbcb;
+    }
+
+    .delete-btn {
+      width: 100%;
+      padding: 12px;
+      background: #c53a3a;
+      color: white;
+      border: none;
+      border-radius: 60px;
+      margin-top: 12px;
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.15s;
+      letter-spacing: 0.6px;
+    }
+    .delete-btn:hover {
+      background: #a12b2b;
+      transform: scale(0.99);
+    }
+
+    .order-divider {
+      border: none;
+      border-top: 2px dotted #d0e0d0;
+      margin: 30px 0 10px;
+    }
+
+    .empty-msg {
+      text-align: center;
+      color: #6e8f6e;
+      padding: 40px 10px;
+      background: #f6faf6;
+      border-radius: 60px;
+      margin-top: 30px;
+      font-style: italic;
+      border: 1px dashed #b3ceb3;
+    }
+
+    /* responsive */
+    @media (max-width: 480px) {
+      .container { padding: 18px; }
+      h1 { font-size: 26px; }
+      .flex button { font-size: 14px; padding: 12px 6px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="brand-wrap">
+    <h1>📦 অর্ডার করুন</h1>
+    <span class="sub-brand">Mk Mahmud Shoop BD</span>
+  </div>
+
+  <!-- form -->
+  <input type="text" id="name" placeholder="আপনার নাম" autocomplete="name">
+  <input type="text" id="phone" placeholder="মোবাইল নাম্বার" autocomplete="tel">
+  <textarea id="address" placeholder="সম্পূর্ণ ঠিকানা"></textarea>
+
+  <label for="screenshotUpload">📷 স্ক্রিনশট আপলোড করুন</label>
+  <input type="file" id="screenshotUpload" accept="image/*">
+  <label for="screenshotUpload" class="file-label" id="fileLabel">📎 ফাইল নির্বাচন করুন</label>
+  <span id="fileName" style="margin-left: 12px; font-size: 15px; color: #2a5a2a;"></span>
+
+  <button class="btn-primary" onclick="saveOrder()">✅ অর্ডার করুন</button>
+
+  <hr class="order-divider">
+  <div id="orders"></div>
+</div>
+
+<script>
+  (function() {
+    // ====== data ======
+    let orders = JSON.parse(localStorage.getItem("orders_mk")) || [];
+
+    // ====== DOM refs ======
+    const nameIn = document.getElementById('name');
+    const phoneIn = document.getElementById('phone');
+    const addressIn = document.getElementById('address');
+    const fileInput = document.getElementById('screenshotUpload');
+    const fileNameSpan = document.getElementById('fileName');
+    const ordersDiv = document.getElementById('orders');
+
+    // ====== file label update ======
+    fileInput.addEventListener('change', function() {
+      if (this.files && this.files[0]) {
+        fileNameSpan.textContent = this.files[0].name;
+      } else {
+        fileNameSpan.textContent = '';
+      }
+    });
+
+    // ====== save order ======
+    window.saveOrder = function() {
+      const name = nameIn.value.trim();
+      const phone = phoneIn.value.trim();
+      const address = addressIn.value.trim();
+      const file = fileInput.files[0];
+
+      if (!name || !phone || !address) {
+        alert('⚠️ সব তথ্য পূরণ করুন (নাম, মোবাইল, ঠিকানা)');
+        return;
+      }
+
+      // if file exists, read as dataURL
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const order = {
+            id: Date.now() + Math.floor(Math.random() * 1000),
+            name: name,
+            phone: phone,
+            address: address,
+            screenshot: e.target.result,
+            status: 'Pending'
+          };
+          orders.push(order);
+          localStorage.setItem('orders_mk', JSON.stringify(orders));
+          resetForm();
+          renderOrders();
+          alert('🎉 অর্ডার সফল হয়েছে!');
+        };
+        reader.onerror = function() {
+          alert('ছবি আপলোডে সমস্যা, আবার চেষ্টা করুন');
+        };
+        reader.readAsDataURL(file);
+      } else {
+        // without screenshot
+        const order = {
+          id: Date.now() + Math.floor(Math.random() * 1000),
+          name: name,
+          phone: phone,
+          address: address,
+          screenshot: '',
+          status: 'Pending'
+        };
+        orders.push(order);
+        localStorage.setItem('orders_mk', JSON.stringify(orders));
+        resetForm();
+        renderOrders();
+        alert('🎉 অর্ডার সফল হয়েছে!');
+      }
+    };
+
+    // ====== reset form ======
+    function resetForm() {
+      nameIn.value = '';
+      phoneIn.value = '';
+      addressIn.value = '';
+      fileInput.value = '';
+      fileNameSpan.textContent = '';
+    }
+
+    // ====== render orders ======
+    window.renderOrders = function() {
+      if (!ordersDiv) return;
+      if (orders.length === 0) {
+        ordersDiv.innerHTML = `<div class="empty-msg">📭 এখনো কোনো অর্ডার নেই</div>`;
+        return;
+      }
+
+      // show latest first (reverse)
+      const reversed = [...orders].reverse();
+      let html = '';
+      reversed.forEach(order => {
+        const statusClass = 
+          order.status === 'Delivered' ? 'delivered' :
+          order.status === 'Cancel' ? 'cancel' : 'pending';
+
+        const screenshotHtml = order.screenshot 
+          ? `<img src="${order.screenshot}" alt="screenshot" loading="lazy">` 
+          : '';
+
+        // delete button only if Delivered
+        const deleteBtnHtml = order.status === 'Delivered' 
+          ? `<button class="delete-btn" onclick="deleteOrder(${order.id})">🗑️ Delete Order</button>` 
+          : '';
+
+        html += `
+          <div class="order-box">
+            <p><b>নাম:</b> ${escapeHtml(order.name)}</p>
+            <p><b>ফোন:</b> ${escapeHtml(order.phone)}</p>
+            <p><b>ঠিকানা:</b> ${escapeHtml(order.address)}</p>
+            ${screenshotHtml}
+            <p class="status">
+              স্ট্যাটাস: 
+              <span class="${statusClass}">${order.status}</span>
+            </p>
+            <div class="flex">
+              <button onclick="delivered(${order.id})">✅ Delivered</button>
+              <button onclick="cancelOrder(${order.id})">❌ Cancel</button>
+            </div>
+            ${deleteBtnHtml}
+          </div>
+        `;
+      });
+
+      ordersDiv.innerHTML = html;
+    };
+
+    // simple escape
+    function escapeHtml(text) {
+      if (!text) return '';
+      return String(text).replace(/[&<>"]/g, function(m) {
+        if (m === '&') return '&amp;';
+        if (m === '<') return '&lt;';
+        if (m === '>') return '&gt;';
+        if (m === '"') return '&quot;';
+        return m;
+      });
+    }
+
+    // ====== delivered ======
+    window.delivered = function(id) {
+      orders = orders.map(order => {
+        if (order.id === id) order.status = 'Delivered';
+        return order;
+      });
+      localStorage.setItem('orders_mk', JSON.stringify(orders));
+      renderOrders();
+    };
+
+    // ====== cancel ======
+    window.cancelOrder = function(id) {
+      orders = orders.map(order => {
+        if (order.id === id) order.status = 'Cancel';
+        return order;
+      });
+      localStorage.setItem('orders_mk', JSON.stringify(orders));
+      renderOrders();
+    };
+
+    // ====== delete ======
+    window.deleteOrder = function(id) {
+      const confirmDel = confirm('আপনি কি এই অর্ডার ডিলিট করতে চান?');
+      if (!confirmDel) return;
+      orders = orders.filter(order => order.id !== id);
+      localStorage.setItem('orders_mk', JSON.stringify(orders));
+      renderOrders();
+    };
+
+    // ====== initial render ======
+    renderOrders();
+
+    // expose orders for debugging (optional)
+    window.__orders = orders;
+
+  })();
+</script>
+
+<!-- extra: click on label triggers file input -->
+<script>
+  // ensure label works
+  document.addEventListener('DOMContentLoaded', function() {
+    const fileInput = document.getElementById('screenshotUpload');
+    const label = document.querySelector('.file-label');
+    if (label && fileInput) {
+      label.addEventListener('click', function(e) {
+        e.preventDefault();
+        fileInput.click();
+      });
+    }
+  });
+</script>
+
+</body>
+</html>
